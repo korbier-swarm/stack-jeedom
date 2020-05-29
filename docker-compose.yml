@@ -12,7 +12,8 @@ services:
     volumes: 
       - /home/pi/volumes-shared/jeedom/html:/var/www/html
       - /home/pi/volumes-shared/jeedom/mysql:/var/lib/mysql     
-    deploy: placement:
+    deploy: 
+      placement:
         constraints:
           - node.role == worker
       labels:
