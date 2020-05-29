@@ -1,0 +1,26 @@
+version: '3'
+
+networks:
+  proxy:
+    external: true
+
+services:
+  server:
+    image: perceval:10007/jeedom
+    ports:
+      - "10008:80"
+    volumes: 
+      - /home/pi/volumes-shared/jeedom/html:/var/www/html
+      - /home/pi/volumes-shared/jeedom/mysql:/var/lib/mysql     
+    deploy: placement:
+        constraints:
+          - node.role == worker
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.jeedom.rule=Host(`jeedom.home`)"
+        - "traefik.http.routers.jeedom.entrypoints=web"
+        - "traefik.http.services.jeedom.loadbalancer.server.port=80"
+        - "traefik.docker.network=proxy"
+    networks:
+      - proxy
+
