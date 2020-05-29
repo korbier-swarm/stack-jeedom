@@ -2,9 +2,28 @@ version: '3'
 
 networks:
   proxy:
-    external: true
+    external: true	
 
 services:
+
+  mqtt:
+    image: eclipse-mosquitto
+    ports:
+      - "1883:1883"
+    deploy:
+      placement:
+        constraints:
+          - node.role == worker
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.mqtt.rule=Host(`mqtt.home`)"
+        - "traefik.http.routers.mqtt.entrypoints=forwarding"
+        - "traefik.http.services.mqtt.loadbalancer.server.port=1883"
+        - "traefik.docker.network=proxy"
+    networks:
+      - proxy
+
+
   server:
     image: perceval:10007/jeedom
     ports:
