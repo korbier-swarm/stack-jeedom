@@ -27,6 +27,7 @@ remote.allowAnyHosts = true
 
 node {
     //checkout scm
+    checkout scm
     git url: 'https://github.com/jeedom/core'
 }
 
