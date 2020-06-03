@@ -44,13 +44,13 @@ node {
     }
 
     stage ('Cleanup local docker image') {
-        sh 'docker rmi ' + dockerImageName
+        sh 'docker rmi ' + dockerImageFullName
     }
 
 }
 
 
-if ( params.deployToGithub ) {
+if ( params.deployStack ) {
 
     withCredentials([usernamePassword(credentialsId: 'ssh-perceval', passwordVariable: 'pwdVariable', usernameVariable: 'userVariable')]) {
         
