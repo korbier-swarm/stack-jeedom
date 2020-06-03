@@ -18,7 +18,7 @@ properties(
 def dockerImageUser     = 'korbier'
 def dockerImagePrefix   = 'rpi-' 
 def dockerImageName     = 'jeedom'
-def dockerImageFullName = dockerImageUser +'/' + rpi + '-' + dockerImageName + ':$BUILD_NUMBER'
+def dockerImageFullName = dockerImageUser +'/' + dockerImagePrefix + '-' + dockerImageName + ':$BUILD_NUMBER'
 
 def remote = [:]
 remote.name = "perceval"
