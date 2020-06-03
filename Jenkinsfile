@@ -36,7 +36,7 @@ node {
         dockerImage = docker.build dockerImageFullName
     }
 
-    docker.withRegistry([credentialsId: 'dockerhub', url: '']) {
+    docker.withRegistry('', 'dockerhub') {
         stage ('Pushing docker image') {
             dockerImage.push()
             dockerImage.push('latest')
