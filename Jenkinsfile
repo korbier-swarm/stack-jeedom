@@ -27,7 +27,6 @@ remote.allowAnyHosts = true
 
 node {
     //checkout scm
-    checkout scm
     git url: 'https://github.com/jeedom/core'
 }
 
@@ -55,6 +54,8 @@ if ( params.deployStack ) {
 
 	node {
 	
+    	git url: 'https://github.com/korbier-swarm/stack-jeedom'
+    
 	    withCredentials([usernamePassword(credentialsId: 'ssh-perceval', passwordVariable: 'pwdVariable', usernameVariable: 'userVariable')]) {
 	        
 	        remote.user = userVariable
