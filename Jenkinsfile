@@ -16,7 +16,7 @@ properties(
 )
 
 def dockerImageUser     = 'korbier'
-def dockerImagePrefix   = 'rpi-' 
+def dockerImagePrefix   = 'rpi' 
 def dockerImageName     = 'jeedom'
 def dockerImageFullName = dockerImageUser +'/' + dockerImagePrefix + '-' + dockerImageName + ':$BUILD_NUMBER'
 
