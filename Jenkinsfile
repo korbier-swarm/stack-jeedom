@@ -37,7 +37,7 @@ node {
     }
 
     docker.withRegistry('', 'dockerhub') {
-        stage ('Pushing to Dockerhub') {
+        stage ('Push to Dockerhub') {
             dockerImage.push()
             dockerImage.push('latest')
         }
