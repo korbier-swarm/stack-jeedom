@@ -37,7 +37,7 @@ node {
     }
 
     docker.withRegistry('', 'dockerhub') {
-        stage ('Pushing docker image') {
+        stage ('Pushing to Dockerhub') {
             dockerImage.push()
             dockerImage.push('latest')
         }
@@ -61,7 +61,7 @@ if ( params.deployStack ) {
 	        remote.user = userVariable
 	        remote.password = pwdVariable
 	
-	        stage("Deploy to swarm") {
+	        stage("Update service") {
 	            sshPut remote: remote, from: 'docker-compose.yml', into: '/tmp'
 	            sshCommand remote: remote, command: 'docker stack deploy -c /tmp/docker-compose.yml ' + dockerImageName            
 	        }
