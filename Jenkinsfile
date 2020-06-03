@@ -52,16 +52,20 @@ node {
 
 if ( params.deployStack ) {
 
-    withCredentials([usernamePassword(credentialsId: 'ssh-perceval', passwordVariable: 'pwdVariable', usernameVariable: 'userVariable')]) {
-        
-        remote.user = userVariable
-        remote.password = pwdVariable
-
-        stage("Deploy to swarm") {
-            sshPut remote: remote, from: 'docker-compose.yml', into: '/tmp'
-            sshCommand remote: remote, command: 'docker stack deploy -c /tmp/docker-compose.yml home-docs'            
-        }
-
-    }
+	node {
+	
+	    withCredentials([usernamePassword(credentialsId: 'ssh-perceval', passwordVariable: 'pwdVariable', usernameVariable: 'userVariable')]) {
+	        
+	        remote.user = userVariable
+	        remote.password = pwdVariable
+	
+	        stage("Deploy to swarm") {
+	            sshPut remote: remote, from: 'docker-compose.yml', into: '/tmp'
+	            sshCommand remote: remote, command: 'docker stack deploy -c /tmp/docker-compose.yml home-docs'            
+	        }
+	
+	    }
+	
+	}
 
 }
