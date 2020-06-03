@@ -63,7 +63,7 @@ if ( params.deployStack ) {
 	
 	        stage("Deploy to swarm") {
 	            sshPut remote: remote, from: 'docker-compose.yml', into: '/tmp'
-	            sshCommand remote: remote, command: 'docker stack deploy -c /tmp/docker-compose.yml home-docs'            
+	            sshCommand remote: remote, command: 'docker stack deploy -c /tmp/docker-compose.yml ' + dockerImageName            
 	        }
 	
 	    }
